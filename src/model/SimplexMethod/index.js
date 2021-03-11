@@ -13,10 +13,10 @@ exports.SimplexMethod = class {
     #table;
 
     /**
-     * @param {number[][]} inequalities
-     * @param {number[]} inequalitiesValues
-     * @param {number[]} targetFoo
-     * @returns {{result: number, variables: number[]}}
+     * @param {number[][]} inequalities                     -коэффециенты линейных уравнений
+     * @param {number[]} inequalitiesValues                 -максимальные значения линейных уравнений / константы
+     * @param {number[]} targetFoo                          -коэффециенты функции цели
+     * @returns {{value: number, variables: number[]}}      -результат и коэффециенты для функции цели
      */
     solve(inequalities, inequalitiesValues, targetFoo) {
         if (inequalities[0].length !== targetFoo.length ||
@@ -27,7 +27,7 @@ exports.SimplexMethod = class {
         this.#inequalities = inequalities;
         this.#targetFoo = targetFoo;
         this.#bValues = inequalitiesValues;
-        this.#basisTargets = [];
+        this.#basisTargets = new Array(this.#basisVarCount);
         for (let i = 0; i < this.#basisVarCount; i++) {
             this.#basisTargets[i] = i + this.#freeVarCount + 1;
         }
@@ -110,14 +110,6 @@ exports.SimplexMethod = class {
             if (key > 0) map.set(key, i);
         }
         this.#basisI = map.get(Math.min(...map.keys()));
-
-        let di = [];
-        for (let i = 0; i < this.#basisVarCount; i++) {
-            di.push(this.#table[i][0] / this.#table[i][this.#basisJ]);
-        }
-        for (let i = 1; i < di.length; i++) {
-            if (di[i] > 0 && di[i] < di[this.#basisI]) this.#basisI = i;
-        }
     }
 
     #recalculateTable() {

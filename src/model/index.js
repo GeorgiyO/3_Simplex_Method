@@ -16,7 +16,7 @@ let globalState = {
             440
         ],
         targetFoo: [
-            13, 17, 24
+            7, 6, 8
         ]
     }),
     result: new DynamicProperty({

@@ -21,7 +21,7 @@ export class ResultPanel extends React.Component {
         return (
             <div className={"ResultPanel"}>
                 <div>
-                    Максимально допустимый доход: {this.state.result.value.toFixed(2)}
+                    Максимально возможное значение функции: {this.state.result.value.toFixed(2)}
                 </div>
                 <div>
                     Значения переменных: {variables}
@@ -29,5 +29,4 @@ export class ResultPanel extends React.Component {
             </div>
         );
     }
-
 }
