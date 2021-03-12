@@ -8,7 +8,7 @@ export class InputPanel extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = props.globalState.parameters.get();
+        this.state = {...props.globalState.parameters.get()};
         props.globalState.parameters.addListener((value) => {
             this.setState({...value});
         });
@@ -82,12 +82,12 @@ export class InputPanel extends React.Component {
             for (let j = 0; j < this.state.inequalities[0].length; j++) {
                 let cell = this.state.inequalities[i][j];
                 row.push(
-                    <input  key={"inpPanCell" + i + "-" + j}
-                            type={"number"}
-                            value={cell}
-                            onChange={(e) => {
-                                this.onCellChange(e.target.value, i, j);
-                            }}
+                    <input key={"inpPanCell" + i + "-" + j}
+                           type={"number"}
+                           value={cell}
+                           onChange={(e) => {
+                               this.onCellChange(e.target.value, i, j);
+                           }}
                     />
                 )
             }
@@ -96,12 +96,12 @@ export class InputPanel extends React.Component {
         for (let i = 0; i < this.state.inequalitiesValues.length; i++) {
             let cell = this.state.inequalitiesValues[i];
             inequalitiesInputs[i].push(
-                <input  key={"inpPanCell" + i + "-" + this.state.inequalities.length}
-                        type={"number"}
-                        value={cell}
-                        onChange={(e) => {
-                            this.onInequalitiesValuesChange(e.target.value, i);
-                        }}
+                <input key={"inpPanCell" + i + "-" + this.state.inequalities[0].length}
+                       type={"number"}
+                       value={cell}
+                       onChange={(e) => {
+                           this.onInequalitiesValuesChange(e.target.value, i);
+                       }}
                 />
             )
         }
@@ -111,12 +111,12 @@ export class InputPanel extends React.Component {
         )
 
         let targetFooInputs = this.state.targetFoo.map((value, i) =>
-            <input  key={"inpPanTarFoo" + i}
-                    type={"number"}
-                    value={value}
-                    onChange={(e) => {
-                        this.onTargetFooChange(e.target.value, i);
-                    }}
+            <input key={"inpPanTarFoo" + i}
+                   type={"number"}
+                   value={value}
+                   onChange={(e) => {
+                       this.onTargetFooChange(e.target.value, i);
+                   }}
             />
         );
 
